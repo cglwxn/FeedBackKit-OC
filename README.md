@@ -4,10 +4,16 @@
 gif如下展示：
 
 1.类似app store首页交互
+
+
+
 ![img](https://github.com/cglwxn/FeebBackKit/blob/master/feedback_list_Gif.gif)
 
 
 
 2.可以当作按钮使用，带有优秀的交互反馈
+
+
+
 ![img](https://github.com/cglwxn/FeebBackKit/blob/master/feedback_button_Gif.gif)
 
