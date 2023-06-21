@@ -80,7 +80,6 @@
     }
 }
 
-
 - (void)judgeBackView:(UIView *)view eventType:(FangFeedbackViewEventType)eventType {
     switch (eventType) {
         case FangFeedbackViewEventTypeBegan:
@@ -97,9 +96,6 @@
             break;
         case FangFeedbackViewEventTypeEnded:
         {
-//            if (view.layer.presentationLayer.transform.m11 < 1) {
-//                [self resetBackViewAnimation:view eventType:eventType];
-//            }
             [self resetBackViewAnimation:view eventType:eventType];
         }
             break;

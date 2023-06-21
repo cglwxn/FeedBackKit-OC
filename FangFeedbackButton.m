@@ -7,8 +7,6 @@
 //
 
 #import "FangFeedbackButton.h"
-#import "UILabel+FangLabel.h"
-#import "NSString+Size.h"
 
 @interface FangFeedbackButton ()
 
@@ -25,7 +23,7 @@
     if (self) {
         [self addSubview:self.contentView];
         self.layoutDirection = FangFeedbackButtonLayoutDirectionHorizental;
-        WS(ws)
+        __weak FangFeedbackButton* ws = self;
         self.feedbackViewTouchEndedHandler = ^(UIView * _Nullable view, CGPoint touchPoint) {
             __strong typeof(ws) ss = ws;
             if (ss.feedbackButtonEventHandler) {
@@ -44,7 +42,7 @@
     self.imageView.image = image;
     
     CGSize size = self.imageView.image.size;
-    CGFloat textLen = [self.textLabel.text sizeWithFont:self.textLabel.font maxSize:CGSizeMake(self.bounds.size.width,self.bounds.size.height)].width;
+    CGFloat textLen = [self.textLabel intrinsicContentSize].width;
     if (self.layoutDirection == FangFeedbackButtonLayoutDirectionHorizental) {
         if (!CGRectEqualToRect(self.labelFrame, CGRectZero) && CGRectEqualToRect(self.imgFrame, CGRectZero)) {
             //外界设置了labelFrame属性
@@ -111,7 +109,7 @@
     
     
     CGSize size = self.imageView.image.size;
-    CGFloat textLen = [self.textLabel.text sizeWithFont:self.textLabel.font maxSize:CGSizeMake(self.bounds.size.width,self.bounds.size.height)].width;
+    CGFloat textLen = [self.textLabel intrinsicContentSize].width;
     if (self.layoutDirection == FangFeedbackButtonLayoutDirectionHorizental) {
         if (!CGRectEqualToRect(self.labelFrame, CGRectZero) && CGRectEqualToRect(self.imgFrame, CGRectZero)) {
             //外界设置了labelFrame属性
@@ -178,7 +176,11 @@
 
 - (UILabel *)textLabel {
     if (!_textLabel) {
-        _textLabel = [UILabel labelWithFrame:CGRectZero text:@"" font:[UIFont fontWithName:@"PingFangSC-Medium" size:15] textColor:[UIColor blackColor] textAlignment:(NSTextAlignmentCenter)];
+        _textLabel = [[UILabel alloc] initWithFrame: CGRectZero];
+        _textLabel.text = @"";
+        _textLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:15];
+        _textLabel.textColor = [UIColor blackColor];
+        _textLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _textLabel;
 }
